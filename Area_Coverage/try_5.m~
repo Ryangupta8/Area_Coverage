@@ -3,14 +3,6 @@ clc
 clear all
 close all
 
-%Robot/Area Dimensions-----------------------------------------------------------
-w = 0.5;                                        % weighing constant
-radr = 0.1;                                     % radius of coverage
-
-%Field Dimensions
-Dx = 10;
-Dy = 10;
-
 % State equations
 syms x1 x2 x3 x4 p1 p2 p3 p4 u1 u2;
 Dx1 = x3;
@@ -20,6 +12,7 @@ Dx4 = u2;
 
 % Cost function inside the integral
 syms g;
+w = 0.5;
 g = (1-w) + w*(u1^2 + u2^2);
 
 % Hamiltonian
@@ -83,28 +76,21 @@ ezplot(-sol_a.p4,[0 2]);    % plot the control: u2=-p4
 
 legend('x1(t)','x2(t)','x3(t)','x4(t)','u1(t)','u2(t)')
 axis([0 2 -5 12]);
-text(0.2,1.1,'x_1(t)');
-text(0.6,0.5,'x_2(t)');
-text(0.2,4.0,'x_3(t)');
-text(0.2,-1.0,'x_4(t) = 0');
-text(0.5,-1.0,'u_2(t) = 0');
-text(0.45,8.0,'u_1(t)');
+% text(0.2,1.1,'x_1(t)');
+% text(0.6,0.5,'x_2(t)');
+% text(0.2,4.0,'x_3(t)');
+% text(0.2,-1.0,'x_4(t) = 0');
+% text(0.5,-1.0,'u_2(t) = 0');
+% text(0.45,8.0,'u_1(t)');
 xlabel('time');
 ylabel('states');
 hold off;
-print -djpeg90 -r0 statesVtime_1slice.jpg
+print -djpeg90 -r0 slice_i.jpg
 
 figure(2);
-fplot(sol_a.x1,sol_a.x2,[0,2],'-.r'); hold on;
-rectangle('Position',[0,0,Dx,Dy],'Curvature', [0 0],'LineWidth',1.5,'Linestyle',':');
-box on;
-xlim([-1 11]);
-ylim([-1 11]);
-title('Robot Coverage Path - No Obstacles');
-xlabel('x_1(t)');
-ylabel('x_2(t)');
-print -djpeg90 -r0 area_coverage.jpg
-
+fplot(sol_a.x1,sol_a.x2); hold on;
+xlabel('time');
+ylabel('states');
 
 
 end

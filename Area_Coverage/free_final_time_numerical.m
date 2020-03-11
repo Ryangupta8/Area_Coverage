@@ -82,7 +82,7 @@ function free_final_time_numerical
             u2t = -y(8,:);
             plot(y(1,:),y(2,:),'-.r');
         end
-        if rem(i,2) ==0
+        if rem(i,2) == 0
             sol_2 = bvp4c(@ode, @bc2, solinit);
             y = sol_2.y;
             time = y(9)*sol_2.x;
@@ -93,7 +93,7 @@ function free_final_time_numerical
         clear y
     end
     
-    print -djpeg90 -r0 2slice_final_free_area_coverage_numerical.jpg
+    print -djpeg90 -r0 2_slicefinal_free_area_coverage_numerical.jpg
   
     
     % -------------------------------------------------------------------------

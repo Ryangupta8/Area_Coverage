@@ -11,6 +11,7 @@ radr = 0.1;                                     % radius of coverage
 Dx = 10;
 Dy = 10;
 
+
 % State equations
 syms x1 x2 x3 x4 p1 p2 p3 p4 u1 u2;
 Dx1 = x3;
@@ -53,10 +54,11 @@ eq6 = strcat('Dp2=',char(Dp2))
 eq7 = strcat('Dp3=',char(Dp3))
 eq8 = strcat('Dp4=',char(Dp4))
 
-sol_h = dsolve(eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8);
-
+sol_h = dsolve(eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8); 
+%%% "We first supply the ODE?s and boundary... 
+%%%         conditions on states and costates to dsolve" 
+%------------------------------------------------------------------------------------
 % use boundary conditions to determine the coefficients
-% % % %    case a: (a) x1(0)=x2(0)=0; x1(2) = 5; x2(2) = 2;
 conA1 = 'x1(0) = 0';
 conA2 = 'x2(0) = 0.1';
 conA3 = 'x3(0) = 1';
@@ -74,12 +76,12 @@ time = linspace(0,2,20);
 
 % plot both solutions
 figure(1);
-ezplot(sol_a.x1,[0 2]); hold on;
-ezplot(sol_a.x2,[0 2]);
-ezplot(sol_a.x3,[0 2]);    
-ezplot(sol_a.x4,[0 2]);    
-ezplot(-sol_a.p3,[0 2]);    % plot the control: u1=-p3
-ezplot(-sol_a.p4,[0 2]);    % plot the control: u2=-p4
+fplot(sol_a.x1,[0 2]); hold on;
+fplot(sol_a.x2,[0 2]);
+fplot(sol_a.x3,[0 2]);    
+fplot(sol_a.x4,[0 2]);    
+fplot(-sol_a.p3,[0 2]);    % plot the control: u1=-p3
+fplot(-sol_a.p4,[0 2]);    % plot the control: u2=-p4
 
 legend('x1(t)','x2(t)','x3(t)','x4(t)','u1(t)','u2(t)')
 axis([0 2 -5 12]);
